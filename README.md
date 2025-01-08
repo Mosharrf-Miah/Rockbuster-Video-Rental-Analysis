@@ -3,7 +3,7 @@
 ## Project Summary
 Rockbuster Stealth LLC are a worldwide video rental company. This project is aimed at answering key strategic questions, enabling Rockbuster to differentiate their revenue source and expand within the streaming market.
 SQL is used to retrieve data driven insights, focusing on identifying average rental durations, sales across regions and customer geographical distribution. The results were visualised to provide clear and actionable insights. 
-This project demostrates the ability to answer complex business problems using both SQL for the analysis and Tableau for the visualisations. 
+This project demostrates the ability to answer complex business problems using both SQL for the analysis and Tableau for the visualisations.
 
 
 ## Objective & Key Questions 
@@ -17,3 +17,10 @@ the main questions they’d like to answer:
 3. Which countries are Rockbuster customers based in?
 4. Where are customers with a high lifetime value based?
 5. Do sales figures vary between geographic regions?
+
+## Data & Tools
+
+The dataset includes comprehensive information on Rockbuster’s film inventory, customer profiles, and payment transactions. Postgre SQL was used for analysis and Tableau was used to create the Visualisations. 
+
+
+
