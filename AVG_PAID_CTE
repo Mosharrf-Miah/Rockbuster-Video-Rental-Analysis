@@ -1,0 +1,52 @@
+Question: What is the average paid by the top 5 customers from the top 10 countries?
+
+WITH top_10_countries AS
+(
+           SELECT     d.country
+           FROM       customer A
+           INNER JOIN address B
+           ON         a.address_id = b.address_id
+           INNER JOIN city C
+           ON         b.city_id = c.city_id
+           INNER JOIN country D
+           ON         c.country_id = d.country_id
+           GROUP BY   d.country
+           ORDER BY   Count(a.customer_id) DESC limit 10), top_city AS
+(
+           SELECT     ci.city
+           FROM       customer cu
+           INNER JOIN address ad
+           ON         cu.address_id = ad.address_id
+           INNER JOIN city Ci
+           ON         ad.city_id = ci.city_id
+           INNER JOIN country co
+           ON         ci.country_id = co.country_id
+           WHERE      co.country IN
+                      (
+                             SELECT *
+                             FROM   top_10_countries)
+           GROUP BY   co.country,
+                      ci.city
+           ORDER BY   Count(cu.customer_id) DESC limit 10), top_customer AS
+(
+           SELECT     Sum(a.amount) AS total_amount
+           FROM       payment A
+           INNER JOIN customer B
+           ON         a.customer_id = b.customer_id
+           INNER JOIN address C
+           ON         b.address_id = c.address_id
+           INNER JOIN city D
+           ON         c.city_id = d.city_id
+           INNER JOIN country E
+           ON         d.country_id = e.country_id
+           WHERE      d.city IN
+                      (
+                             SELECT *
+                             FROM   top_city)
+           GROUP BY   b.first_name,
+                      b.last_name,
+                      d.city,
+                      e.country
+           ORDER BY   total_amount DESC limit 5)
+SELECT Avg(total_amount)
+FROM   top_customer
